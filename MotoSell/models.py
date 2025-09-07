@@ -24,7 +24,9 @@ class Pojazd(models.Model):
     pojemnosc_skokowa = models.PositiveIntegerField()
     rodzaj_paliwa = models.CharField(max_length=10, choices=PALIWO.items())
     uzytkownik = models.ForeignKey(User, on_delete=models.CASCADE)
-    #zdjecie =
-    #TODO
-    data_dodania = models.DateField()
-    data_publikacji = models.DateField(null=True)
+    zdjecie = models.ImageField(upload_to="zdjecia")
+    data_dodania = models.DateField(auto_now_add=True)
+    data_publikacji = models.DateField(null=True, blank=True)
+
+    def __str__(self):
+        return f"{self.uzytkownik.username} {self.marka} {self.model}"
