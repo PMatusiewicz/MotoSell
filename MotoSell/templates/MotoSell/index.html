@@ -5,7 +5,11 @@
         <title>Title</title>
     </head>
     <body>
-        <h1>test</h1>
-        <p>test2</p>
+        {% if uzytkownik.is_authenticated %}
+        	<h1>zalogowany jako {{ uzytkownik.username }}</h1>
+        {% else %}
+            <h1>niezalogowany</h1>
+            <a href="/rejestracja">Zarejestruj się</a>
+        {% endif %}
     </body>
 </html>

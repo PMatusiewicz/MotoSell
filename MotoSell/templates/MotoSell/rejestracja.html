@@ -1,0 +1,17 @@
+<!DOCTYPE html>
+<html lang="pl">
+{% load static %}
+    <head>
+        <meta charset="UTF-8">
+        <title>Title</title>
+    </head>
+    <body>
+        <form method="post">
+            {% csrf_token %}
+            <h2>Zarejestruj się</h2>
+            {{ formularz_rejestracji }}
+            <button type="submit" name="rejestracja">Zarejestruj się</button>
+        </form>
+
+    </body>
+</html>
