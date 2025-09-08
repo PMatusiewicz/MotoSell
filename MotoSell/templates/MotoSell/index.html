@@ -1,17 +1,19 @@
 <!DOCTYPE html>
 <html lang="pl">
+{% load static %}
     <head>
         <meta charset="UTF-8">
         <title>Title</title>
+        <link rel="stylesheet" href="{% static 'style.css' %}">
     </head>
     <body>
-        {% if uzytkownik.is_authenticated %}
-        	<h1>zalogowany jako {{ uzytkownik.username }}</h1>
-            <a href="{% url 'wyloguj' %}"><button>Wyloguj się</button></a>
-        {% else %}
-            <h1>niezalogowany</h1>
-            <a href="/rejestracja">Zarejestruj się</a>
-            <a href="/login">Zaloguj się</a>
-        {% endif %}
+    {% if uzytkownik.is_authenticated %}
+        <h1>zalogowany jako {{ uzytkownik.username }}</h1>
+        <a href="{% url 'wyloguj' %}"><button>Wyloguj się</button></a>
+    {% else %}
+        <h1>niezalogowany</h1>
+        <a href="/rejestracja">Zarejestruj się</a>
+        <a href="/login">Zaloguj się</a>
+    {% endif %}
     </body>
 </html>
