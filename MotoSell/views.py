@@ -1,6 +1,7 @@
 from django.contrib.auth import logout, login as auth_login
 from django.contrib.auth.forms import UserCreationForm, AuthenticationForm
 from django.shortcuts import render, redirect
+from .forms import PojazdForm
 
 def index(request):
     uzytkownik = request.user
@@ -14,7 +15,7 @@ def rejestracja(request):
         if formularz_rejestracji.is_valid():
             nowy_uzytkownik = formularz_rejestracji.save()
             auth_login(request, nowy_uzytkownik)
-            return redirect('index')
+            return redirect("index")
     else:
         formularz_rejestracji = UserCreationForm()
 
@@ -28,7 +29,7 @@ def login(request):
         if formularz_logowania.is_valid():
             nowy_uzytkownik = formularz_logowania.get_user()
             auth_login(request, nowy_uzytkownik)
-            return redirect('index')
+            return redirect("index")
     else:
         formularz_logowania = AuthenticationForm()
 
@@ -38,4 +39,18 @@ def login(request):
 
 def wyloguj(request):
     logout(request)
-    return redirect('index')
+    return redirect("index")
+
+def kreator(request):
+    if request.method == "POST":
+        formularz_pojazdu = PojazdForm(request.POST, request.FILES)
+        if formularz_pojazdu.is_valid():
+            pojazd = formularz_pojazdu.save(commit=False)
+            pojazd.uzytkownik = request.user
+            pojazd.save()
+            return redirect("index")
+    else:
+        formularz_pojazdu = PojazdForm()
+    return render(request, "MotoSell/kreator.html", {
+        "formularz_pojazdu": formularz_pojazdu
+    })
