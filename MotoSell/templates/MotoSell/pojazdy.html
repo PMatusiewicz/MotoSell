@@ -1,0 +1,18 @@
+<!DOCTYPE html>
+<html lang="pl">
+{% load static %}
+    <head>
+        <meta charset="UTF-8">
+        <title>MotoSell</title>
+    </head>
+    <body>
+    {% if not pojazdy_wszystkie  %}
+        <h1>Nie ma żadnych pojazdów</h1>
+    {% else %}
+        {% for pojazd in pojazdy_wszystkie %}
+        <p>{{ pojazd }}</p>
+        {% endfor %}
+    {% endif %}
+    <br><a href="/">Powrót na stronę główną</a>
+    </body>
+</html>

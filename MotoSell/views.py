@@ -1,7 +1,9 @@
 from django.contrib.auth import logout, login as auth_login
+from django.contrib.auth.decorators import login_required
 from django.contrib.auth.forms import UserCreationForm, AuthenticationForm
 from django.shortcuts import render, redirect
 from .forms import PojazdForm
+from .models import Pojazd
 
 def index(request):
     uzytkownik = request.user
@@ -41,6 +43,7 @@ def wyloguj(request):
     logout(request)
     return redirect("index")
 
+@login_required
 def kreator(request):
     if request.method == "POST":
         formularz_pojazdu = PojazdForm(request.POST, request.FILES)
@@ -53,4 +56,10 @@ def kreator(request):
         formularz_pojazdu = PojazdForm()
     return render(request, "MotoSell/kreator.html", {
         "formularz_pojazdu": formularz_pojazdu
+    })
+
+def pojazdy(request):
+    pojazdy_wszystkie = Pojazd.objects.all()
+    return  render(request, "MotoSell/pojazdy.html", {
+        "pojazdy_wszystkie": pojazdy_wszystkie
     })

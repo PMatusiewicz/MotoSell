@@ -3,18 +3,20 @@
 {% load static %}
     <head>
         <meta charset="UTF-8">
-        <title>Title</title>
+        <title>MotoSell</title>
         <link rel="stylesheet" href="{% static 'style.css' %}">
     </head>
     <body>
     {% if uzytkownik.is_authenticated %}
         <h1>zalogowany jako {{ uzytkownik.username }}</h1>
         <a href="{% url 'wyloguj' %}"><button>Wyloguj się</button></a>
-        <a href="{% url 'kreator' %}">Stwórz nową ofertę</a>
+        <a href="{% url 'pojazdy/kreator' %}">Stwórz nową ofertę</a>
+        <a href="{% url 'pojazdy' %}">Pokaż oferty</a>
     {% else %}
         <h1>niezalogowany</h1>
         <a href="/rejestracja">Zarejestruj się</a>
         <a href="/login">Zaloguj się</a>
+        <a href="{% url 'pojazdy' %}">Pokaż oferty</a>
     {% endif %}
     </body>
 </html>
