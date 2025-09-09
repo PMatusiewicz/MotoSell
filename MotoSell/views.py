@@ -51,7 +51,7 @@ def kreator(request):
             pojazd = formularz_pojazdu.save(commit=False)
             pojazd.uzytkownik = request.user
             pojazd.save()
-            return redirect("index")
+            return redirect("/pojazdy")
     else:
         formularz_pojazdu = PojazdForm()
     return render(request, "MotoSell/kreator.html", {

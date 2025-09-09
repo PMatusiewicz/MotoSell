@@ -10,12 +10,14 @@
         <h1>Nie ma żadnych pojazdów</h1>
     {% else %}
         {% for pojazd in pojazdy_wszystkie %}
-        <a href="/pojazdy/{{ pojazd.id }}">
-            <h3>{{ pojazd.tytul }}</h3>
-            <p>Oferta użytkownika: {{ pojazd.uzytkownik.username }}</p>
-            <p>{{ pojazd.marka }} {{ pojazd.model }}</p>
-        </a>
-        <hr>
+            {% if pojazd.czy_opublikowany %}
+                <a href="/pojazdy/{{ pojazd.id }}">
+                    <h3>{{ pojazd.tytul }}</h3>
+                    <p>Oferta użytkownika: {{ pojazd.uzytkownik.username }}</p>
+                    <p>{{ pojazd.marka }} {{ pojazd.model }}</p>
+                </a>
+                <hr>
+            {% endif %}
         {% endfor %}
     {% endif %}
         <br><a href="/">Powrót na stronę główną</a>
