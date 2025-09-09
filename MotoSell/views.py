@@ -60,6 +60,12 @@ def kreator(request):
 
 def pojazdy(request):
     pojazdy_wszystkie = Pojazd.objects.all()
-    return  render(request, "MotoSell/pojazdy.html", {
+    return render(request, "MotoSell/pojazdy.html", {
         "pojazdy_wszystkie": pojazdy_wszystkie
+    })
+
+def oferta(request, pk):
+    pojazd = Pojazd.objects.get(pk=pk)
+    return render(request, "MotoSell/oferta.html",{
+        "pojazd": pojazd
     })

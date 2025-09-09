@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html lang="pl">
+{% load static %}
+    <head>
+        <meta charset="UTF-8">
+        <title>MotoSell</title>
+    </head>
+    <body>
+        <h1>{{ pojazd.tytul }}</h1>
+        <p>Opis: {{ pojazd.opis }}</p>
+        <p>Oferta użytkownika: {{ pojazd.uzytkownik.username }}</p>
+        <p>Kategoria: {{ pojazd.kategoria }}</p>
+        <p>Marka: {{ pojazd.marka }}</p>
+        <p>Model: {{ pojazd.model }}</p>
+        <p>Rok produkcji: {{ pojazd.rok_produkcji }}</p>
+        <p>Przebieg: {{ pojazd.przebieg }}</p>
+        <p>Pojemność skokowa: {{ pojazd.pojemnosc_skokowa }}</p>
+        <p>Rodzaj paliwa: {{ pojazd.rodzaj_paliwa }}</p>
+        <p>Zdjęcie pojazdu:</p>
+        <img src="{{ pojazd.zdjecie.url }}" alt="zdjęcie pojazdu" height="200px">
+        <br><a href="/">Powrót na stronę główną</a>
+        <br><a href="/pojazdy">Zobacz wszystkie oferty</a>
+    </body>
+</html>
