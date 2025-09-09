@@ -11,11 +11,12 @@
         <h1>zalogowany jako {{ uzytkownik.username }}</h1>
         <a href="{% url 'wyloguj' %}"><button>Wyloguj się</button></a>
         <a href="{% url 'kreator' %}">Stwórz nową ofertę</a>
-        <a href="{% url 'pojazdy' %}">Pokaż oferty</a>
+        <a href="{% url 'pojazdy' %}">Pokaż wszystkie oferty</a>
+        <br><a href="{% url 'moje_pojazdy' %}">Zobacz swoje oferty</a>
     {% else %}
         <h1>niezalogowany</h1>
-        <a href="/rejestracja">Zarejestruj się</a>
-        <a href="/login">Zaloguj się</a>
+        <a href="{% url 'rejestracja' %}">Zarejestruj się</a>
+        <a href="{% url 'login' %}">Zaloguj się</a>
         <a href="{% url 'pojazdy' %}">Pokaż oferty</a>
     {% endif %}
     </body>

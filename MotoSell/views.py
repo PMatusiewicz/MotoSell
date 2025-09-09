@@ -59,8 +59,12 @@ def kreator(request):
     })
 
 def pojazdy(request):
-    pojazdy_wszystkie = Pojazd.objects.all()
-    return render(request, "MotoSell/pojazdy.html", {
+    pojazdy_wszystkie = Pojazd.objects.filter()
+    if request.path.endswith("moje/"):
+        szablon = "MotoSell/moje_pojazdy.html"
+    else:
+        szablon = "MotoSell/pojazdy.html"
+    return render(request, szablon, {
         "pojazdy_wszystkie": pojazdy_wszystkie
     })
 
