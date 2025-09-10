@@ -11,7 +11,7 @@
         {% else %}
             {% for pojazd in pojazdy_wszystkie %}
                 {% if pojazd.czy_opublikowany %}
-                    <a href="/pojazdy/{{ pojazd.id }}">
+                    <a href="{% url 'pojazdy' %}/{{ pojazd.id }}">
                         <h3>{{ pojazd.tytul }}</h3>
                         <p>Oferta użytkownika: {{ pojazd.uzytkownik.username }}</p>
                         <p>{{ pojazd.marka }} {{ pojazd.model }}</p>
@@ -20,9 +20,9 @@
                 {% endif %}
             {% endfor %}
         {% endif %}
-        <br><a href="/">Powrót na stronę główną</a>
+        <br><a href="{% url 'index' %}">Powrót na stronę główną</a>
         {% if request.user.is_authenticated %}
-            <br><a href="/pojazdy/moje">Zobacz swoje oferty</a>
+            <br><a href="{% url 'moje_pojazdy' %}">Zobacz swoje oferty</a>
         {% endif %}
     </body>
 </html>

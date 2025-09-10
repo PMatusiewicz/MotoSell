@@ -12,7 +12,7 @@
     {% else %}
         {% for pojazd in pojazdy_wszystkie %}
             {% if pojazd.uzytkownik == request.user %}
-                <a href="/pojazdy/{{ pojazd.id }}">
+                <a href="{% url 'pojazdy' %}/{{ pojazd.id }}">
                     <h3>{{ pojazd.tytul }}</h3>
                     <p>Oferta użytkownika: {{ pojazd.uzytkownik.username }}</p>
                     <p>{{ pojazd.marka }} {{ pojazd.model }}</p>
@@ -26,7 +26,7 @@
             {% endif %}
         {% endfor %}
     {% endif %}
-        <br><a href="/">Powrót na stronę główną</a>
-        <br><a href="/pojazdy">Zobacz wszystkie oferty</a>
+        <br><a href="{% url 'index' %}">Powrót na stronę główną</a>
+        <br><a href="{% url 'pojazdy' %}">Zobacz wszystkie oferty</a>
     </body>
 </html>

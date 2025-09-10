@@ -18,7 +18,7 @@
         <p>Rodzaj paliwa: {{ pojazd.rodzaj_paliwa }}</p>
         <p>Zdjęcie pojazdu:</p>
         <img src="{{ pojazd.zdjecie.url }}" alt="zdjęcie pojazdu" height="200px">
-        <br><a href="/">Powrót na stronę główną</a>
-        <br><a href="/pojazdy">Zobacz wszystkie oferty</a>
+        <br><a href="{% url 'index' %}">Powrót na stronę główną</a>
+        <br><a href="{% url 'pojazdy' %}">Zobacz wszystkie oferty</a>
     </body>
 </html>
