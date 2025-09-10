@@ -19,12 +19,15 @@
         <p>Zdjęcie pojazdu:</p>
         <img src="{{ pojazd.zdjecie.url }}" alt="zdjęcie pojazdu" height="200px">
         {% if pojazd.czy_opublikowany %}
-            <p>Oferta opublikowana</p>
+            <p>Oferta opublikowana w dniu {{ pojazd.data_publikacji }}</p>
         {% else %}
             <p>Oferta nieopublikowana</p>
             {% if pojazd.uzytkownik == request.user %}
-                <a href="{% url  'publikuj' pojazd.id %}"><button>Publikuj</button></a>
+                <a href="{% url 'publikuj' pojazd.id %}"><button>Publikuj</button></a>
             {% endif %}
+        {% endif %}
+        {% if pojazd.uzytkownik == request.user %}
+                <a href="{% url 'usun' pojazd.id %}"><button>Usuń</button></a>
         {% endif %}
         <br><a href="{% url 'index' %}">Powrót na stronę główną</a>
         <br><a href="{% url 'pojazdy' %}">Zobacz wszystkie oferty</a>

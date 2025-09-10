@@ -11,7 +11,7 @@
         <h1>zalogowany jako {{ uzytkownik.username }}</h1>
         <a href="{% url 'wyloguj' %}"><button>Wyloguj się</button></a>
         <a href="{% url 'kreator' %}">Stwórz nową ofertę</a>
-        <a href="{% url 'pojazdy' %}">Pokaż wszystkie oferty</a>
+        <a href="{% url 'pojazdy' %}">Pokaż wszystkie opublikowane oferty</a>
         <br><a href="{% url 'moje_pojazdy' %}">Zobacz swoje oferty</a>
     {% else %}
         <h1>niezalogowany</h1>

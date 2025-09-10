@@ -91,3 +91,10 @@ def publikuj(request, pk):
     pojazd.data_publikacji = datetime.datetime.now()
     pojazd.save()
     return redirect("oferta", pk=pk)
+
+@login_required
+def usun(request, pk):
+    pojazd = get_object_or_404(Pojazd, pk=pk, uzytkownik=request.user)
+    pojazd.czy_usuniety = True
+    pojazd.save()
+    return redirect("moje_pojazdy")

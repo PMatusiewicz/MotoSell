@@ -11,7 +11,7 @@
         <h1>Nie ma żadnych pojazdów</h1>
     {% else %}
         {% for pojazd in pojazdy_wszystkie %}
-            {% if pojazd.uzytkownik == request.user %}
+            {% if pojazd.uzytkownik == request.user and not pojazd.czy_usuniety %}
                 <a href="{% url 'pojazdy' %}/{{ pojazd.id }}">
                     <h3>{{ pojazd.tytul }}</h3>
                     <p>Oferta użytkownika: {{ pojazd.uzytkownik.username }}</p>
@@ -27,6 +27,6 @@
         {% endfor %}
     {% endif %}
         <br><a href="{% url 'index' %}">Powrót na stronę główną</a>
-        <br><a href="{% url 'pojazdy' %}">Zobacz wszystkie oferty</a>
+        <br><a href="{% url 'pojazdy' %}">Zobacz wszystkie opublikowane oferty</a>
     </body>
 </html>

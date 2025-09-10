@@ -27,6 +27,7 @@ class Pojazd(models.Model):
     data_dodania = models.DateField(auto_now_add=True)
     data_publikacji = models.DateField(null=True, blank=True)
     czy_opublikowany = models.BooleanField(default=False)
+    czy_usuniety = models.BooleanField(default=False)
 
     def __str__(self):
         return f"{self.uzytkownik.username} {self.marka} {self.model}"
