@@ -1,9 +1,11 @@
 from django.contrib.auth import logout, login as auth_login
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth.forms import UserCreationForm, AuthenticationForm
-from django.shortcuts import render, redirect
+from django.shortcuts import render, redirect, get_object_or_404
+from django.db.models import Q
 from .forms import PojazdForm
 from .models import Pojazd
+import datetime
 
 def index(request):
     uzytkownik = request.user
@@ -39,6 +41,8 @@ def login(request):
         "formularz_logowania": formularz_logowania
     })
 
+
+@login_required
 def wyloguj(request):
     logout(request)
     return redirect("index")
@@ -60,16 +64,30 @@ def kreator(request):
 
 def pojazdy(request):
     pojazdy_wszystkie = Pojazd.objects.filter()
-    if request.path.endswith("moje/"):
-        szablon = "MotoSell/moje_pojazdy.html"
-    else:
-        szablon = "MotoSell/pojazdy.html"
-    return render(request, szablon, {
+    return render(request, "MotoSell/pojazdy.html", {
+        "pojazdy_wszystkie": pojazdy_wszystkie
+    })
+
+@login_required
+def moje_pojazdy(request):
+    pojazdy_wszystkie = Pojazd.objects.filter()
+    return render(request, "MotoSell/moje_pojazdy.html", {
         "pojazdy_wszystkie": pojazdy_wszystkie
     })
 
 def oferta(request, pk):
-    pojazd = Pojazd.objects.get(pk=pk)
+    if request.user.is_authenticated:
+        pojazd = get_object_or_404(Pojazd, Q(pk=pk) & (Q(czy_opublikowany=True) | Q(uzytkownik=request.user)))
+    else:
+        pojazd = get_object_or_404(Pojazd, pk=pk, czy_opublikowany=True)
     return render(request, "MotoSell/oferta.html",{
         "pojazd": pojazd
     })
+
+@login_required
+def publikuj(request, pk):
+    pojazd = get_object_or_404(Pojazd, pk=pk, uzytkownik=request.user)
+    pojazd.czy_opublikowany = True
+    pojazd.data_publikacji = datetime.datetime.now()
+    pojazd.save()
+    return redirect("oferta", pk=pk)
