@@ -54,6 +54,8 @@ def kreator(request):
         if formularz_pojazdu.is_valid():
             pojazd = formularz_pojazdu.save(commit=False)
             pojazd.uzytkownik = request.user
+            if pojazd.czy_opublikowany:
+                pojazd.data_publikacji = datetime.date.today()
             pojazd.save()
             return redirect("/pojazdy")
     else:
@@ -96,7 +98,7 @@ def publikuj(request, pk):
 def cofnij_publikacje(request, pk):
     pojazd = get_object_or_404(Pojazd, pk=pk, uzytkownik=request.user)
     pojazd.czy_opublikowany = False
-    pojazd.data_publikacji = datetime.datetime.now()
+    pojazd.data_publikacji = None
     pojazd.save()
     return redirect("oferta", pk=pk)
 

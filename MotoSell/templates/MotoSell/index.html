@@ -15,9 +15,9 @@
         <br><a href="{% url 'moje_pojazdy' %}">Zobacz swoje oferty</a>
     {% else %}
         <h1>niezalogowany</h1>
-        <a href="{% url 'rejestracja' %}">Zarejestruj się</a>
-        <a href="{% url 'login' %}">Zaloguj się</a>
-        <a href="{% url 'pojazdy' %}">Pokaż oferty</a>
+        <br><a href="{% url 'rejestracja' %}">Zarejestruj się</a>
+        <br><a href="{% url 'login' %}">Zaloguj się</a>
+        <br><a href="{% url 'pojazdy' %}">Pokaż oferty</a>
     {% endif %}
     </body>
 </html>
