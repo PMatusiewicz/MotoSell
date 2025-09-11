@@ -77,9 +77,9 @@ def moje_pojazdy(request):
 
 def oferta(request, pk):
     if request.user.is_authenticated:
-        pojazd = get_object_or_404(Pojazd, Q(pk=pk) & (Q(czy_opublikowany=True) | Q(uzytkownik=request.user)))
+        pojazd = get_object_or_404(Pojazd, Q(pk=pk) & Q(czy_usuniety=False) & (Q(czy_opublikowany=True) | Q(uzytkownik=request.user)))
     else:
-        pojazd = get_object_or_404(Pojazd, pk=pk, czy_opublikowany=True)
+        pojazd = get_object_or_404(Pojazd, pk=pk, czy_opublikowany=True, czy_usuniety=False)
     return render(request, "MotoSell/oferta.html",{
         "pojazd": pojazd
     })
