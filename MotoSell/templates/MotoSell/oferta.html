@@ -20,6 +20,9 @@
         <img src="{{ pojazd.zdjecie.url }}" alt="zdjęcie pojazdu" height="200px">
         {% if pojazd.czy_opublikowany %}
             <p>Oferta opublikowana w dniu {{ pojazd.data_publikacji }}</p>
+            {% if pojazd.uzytkownik == request.user %}
+                <a href="{% url 'cofnij_publikacje' pojazd.id %}"><button>Cofnij publikację</button></a>
+            {% endif %}
         {% else %}
             <p>Oferta nieopublikowana</p>
             {% if pojazd.uzytkownik == request.user %}

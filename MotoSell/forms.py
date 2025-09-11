@@ -6,5 +6,5 @@ class PojazdForm(ModelForm):
         model = Pojazd
         exclude = ['uzytkownik', 'data_dodania', 'data_publikacji', 'czy_usuniety']
         labels = {
-            'czy_opublikowany': "Czy chcesz odrazu opublikować ofertę?"
+            'czy_opublikowany': "Czy chcesz opublikować ofertę?"
         }
