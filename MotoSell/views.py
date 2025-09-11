@@ -120,7 +120,7 @@ def edytuj(request, pk):
             if zmodyfikowany_pojazd.czy_opublikowany and not zmodyfikowany_pojazd.data_publikacji:
                 zmodyfikowany_pojazd.data_publikacji = datetime.date.today()
             zmodyfikowany_pojazd.save()
-            return redirect("/pojazdy")
+            return redirect("oferta", pk=pk)
     else:
         formularz_pojazdu = PojazdForm(instance=pojazd)
     return render(request, "MotoSell/edytuj.html", {
