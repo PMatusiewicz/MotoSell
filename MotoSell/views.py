@@ -108,3 +108,21 @@ def usun(request, pk):
     pojazd.czy_usuniety = True
     pojazd.save()
     return redirect("moje_pojazdy")
+
+@login_required
+def edytuj(request, pk):
+    pojazd = get_object_or_404(Pojazd, pk=pk, uzytkownik=request.user)
+    if request.method == "POST":
+        formularz_pojazdu = PojazdForm(request.POST, request.FILES, instance=pojazd)
+        if formularz_pojazdu.is_valid():
+            zmodyfikowany_pojazd = formularz_pojazdu.save(commit=False)
+            zmodyfikowany_pojazd.uzytkownik = request.user
+            if zmodyfikowany_pojazd.czy_opublikowany and not zmodyfikowany_pojazd.data_publikacji:
+                zmodyfikowany_pojazd.data_publikacji = datetime.date.today()
+            zmodyfikowany_pojazd.save()
+            return redirect("/pojazdy")
+    else:
+        formularz_pojazdu = PojazdForm(instance=pojazd)
+    return render(request, "MotoSell/edytuj.html", {
+        "formularz_pojazdu": formularz_pojazdu
+    })

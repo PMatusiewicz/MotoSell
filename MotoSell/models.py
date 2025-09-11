@@ -30,4 +30,4 @@ class Pojazd(models.Model):
     czy_usuniety = models.BooleanField(default=False)
 
     def __str__(self):
-        return f"{self.uzytkownik.username} {self.marka} {self.model}"
+        return f"{self.pk}. {self.uzytkownik.username} {self.marka} {self.model}"

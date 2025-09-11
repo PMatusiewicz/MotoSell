@@ -13,4 +13,5 @@ urlpatterns = [
     path('pojazdy/<int:pk>/publikuj', views.publikuj, name='publikuj'),
     path('pojazdy/<int:pk>/cofnij_publikacje', views.cofnij_publikacje, name='cofnij_publikacje'),
     path('pojazdy/<int:pk>/usun', views.usun, name='usun'),
+    path('pojazdy/<int:pk>/edytuj', views.edytuj, name='edytuj'),
 ]

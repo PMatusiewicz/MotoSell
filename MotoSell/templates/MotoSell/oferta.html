@@ -30,7 +30,8 @@
             {% endif %}
         {% endif %}
         {% if pojazd.uzytkownik == request.user %}
-                <a href="{% url 'usun' pojazd.id %}"><button>Usuń</button></a>
+            <a href="{% url 'usun' pojazd.id %}"><button>Usuń</button></a>
+            <a href="{% url 'edytuj' pojazd.id %}"><button>Edytuj</button></a>
         {% endif %}
         <br><a href="{% url 'index' %}">Powrót na stronę główną</a>
         <br><a href="{% url 'pojazdy' %}">Zobacz wszystkie oferty</a>
