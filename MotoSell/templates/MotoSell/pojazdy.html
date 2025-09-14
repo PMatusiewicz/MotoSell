@@ -11,7 +11,7 @@
         {% else %}
             {% for pojazd in pojazdy_wszystkie %}
                 {% if pojazd.czy_opublikowany and not pojazd.czy_usuniety %}
-                    <a href="{% url 'pojazdy' pojazd.id %}">
+                    <a href="{% url 'pojazdy' %}/{{ pojazd.id }}">
                         <h3>{{ pojazd.tytul }}</h3>
                         <p>Oferta użytkownika: {{ pojazd.uzytkownik.username }}</p>
                         <p>{{ pojazd.marka }} {{ pojazd.model }}</p>
