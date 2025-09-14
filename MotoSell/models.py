@@ -31,3 +31,17 @@ class Pojazd(models.Model):
 
     def __str__(self):
         return f"{self.pk}. {self.uzytkownik.username} {self.marka} {self.model}"
+
+class Zdjecie(models.Model):
+    zdjecie = models.ImageField(upload_to="zdjecia")
+
+    def __str__(self):
+        return f"{self.zdjecie}"
+
+class Pivot(models.Model):
+    zdjecie = models.ForeignKey(Zdjecie, on_delete=models.CASCADE)
+    pojazd = models.ForeignKey(Pojazd, on_delete=models.CASCADE)
+    czy_glowne = models.BooleanField(default=False)
+
+    def __str__(self):
+        return f"{self.zdjecie} - {self.pojazd}"
