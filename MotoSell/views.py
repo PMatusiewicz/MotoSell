@@ -4,7 +4,7 @@ from django.contrib.auth.forms import UserCreationForm, AuthenticationForm
 from django.shortcuts import render, redirect, get_object_or_404
 from django.db.models import Q
 from .forms import PojazdForm
-from .models import Pojazd
+from .models import Pojazd, Zdjecie, Pivot
 import datetime
 
 def index(request):
@@ -57,6 +57,10 @@ def kreator(request):
             if pojazd.czy_opublikowany:
                 pojazd.data_publikacji = datetime.date.today()
             pojazd.save()
+            zdjecia = request.FILES.getlist("zdjecia")
+            for zdjecie in zdjecia:
+                model_zdjecia = Zdjecie.objects.create(zdjecie=zdjecie)
+                Pivot.objects.create(pojazd=pojazd, zdjecie=model_zdjecia)
             return redirect("/pojazdy")
     else:
         formularz_pojazdu = PojazdForm()

@@ -10,7 +10,8 @@
             {% csrf_token %}
             <h2>Formularz kreacji ofert</h2>
             {{ formularz_pojazdu }}
-            <button type="submit">Stwórz ofertę</button>
+            <p>Dodaj zdjęcia do galerii:</p><input type="file" multiple name="zdjecia" accept="image/*" required>
+            <br><br><button type="submit">Stwórz ofertę</button>
         </form>
         <a href="{% url 'index' %}">Powrót na stronę główną</a>
     </body>

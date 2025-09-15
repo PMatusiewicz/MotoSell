@@ -16,8 +16,10 @@
         <p>Przebieg: {{ pojazd.przebieg }}</p>
         <p>Pojemność skokowa: {{ pojazd.pojemnosc_skokowa }}</p>
         <p>Rodzaj paliwa: {{ pojazd.rodzaj_paliwa }}</p>
-        <p>Zdjęcie pojazdu:</p>
-        <img src="{{ pojazd.zdjecie.url }}" alt="zdjęcie pojazdu" height="200px">
+        <p>Zdjęcia pojazdu:</p>
+        {% for pivot in pojazd.pivot_set.all %}
+            <img src="{{ pivot.zdjecie.zdjecie.url }}" alt="zdjęcie pojazdu" height="200px">
+        {% endfor %}
         {% if pojazd.czy_opublikowany %}
             <p>Oferta opublikowana w dniu {{ pojazd.data_publikacji }}</p>
             {% if pojazd.uzytkownik == request.user %}
