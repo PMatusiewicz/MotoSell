@@ -1,4 +1,4 @@
-from django.forms import ModelForm
+from django.forms import ModelForm, inlineformset_factory
 from .models import Pojazd, Zdjecie
 
 class PojazdForm(ModelForm):
@@ -8,3 +8,10 @@ class PojazdForm(ModelForm):
         labels = {
             'czy_opublikowany': "Czy chcesz opublikować ofertę?"
         }
+
+class ZdjecieForm(ModelForm):
+    class Meta:
+        model = Zdjecie
+        fields = ['zdjecie', 'czy_glowny']
+
+ZdjecieFormSet = inlineformset_factory(Pojazd, Zdjecie, ZdjecieForm, can_delete=False)

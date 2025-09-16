@@ -3,8 +3,8 @@ from django.contrib.auth.decorators import login_required
 from django.contrib.auth.forms import UserCreationForm, AuthenticationForm
 from django.shortcuts import render, redirect, get_object_or_404
 from django.db.models import Q
-from .forms import PojazdForm
-from .models import Pojazd, Zdjecie, Pivot
+from .forms import PojazdForm, ZdjecieFormSet
+from .models import Pojazd
 import datetime
 
 def index(request):
@@ -51,21 +51,22 @@ def wyloguj(request):
 def kreator(request):
     if request.method == "POST":
         formularz_pojazdu = PojazdForm(request.POST, request.FILES)
-        if formularz_pojazdu.is_valid():
+        formset_galerii = ZdjecieFormSet(request.POST, request.FILES, instance=Pojazd())
+        if formularz_pojazdu.is_valid() and formset_galerii.is_valid():
             pojazd = formularz_pojazdu.save(commit=False)
             pojazd.uzytkownik = request.user
             if pojazd.czy_opublikowany:
                 pojazd.data_publikacji = datetime.date.today()
             pojazd.save()
-            zdjecia = request.FILES.getlist("zdjecia")
-            for zdjecie in zdjecia:
-                model_zdjecia = Zdjecie.objects.create(zdjecie=zdjecie)
-                Pivot.objects.create(pojazd=pojazd, zdjecie=model_zdjecia)
+            formset_galerii.instance = pojazd
+            formset_galerii.save()
             return redirect("/pojazdy")
     else:
         formularz_pojazdu = PojazdForm()
+        formset_galerii = ZdjecieFormSet(instance=Pojazd())
     return render(request, "MotoSell/kreator.html", {
-        "formularz_pojazdu": formularz_pojazdu
+        "formularz_pojazdu": formularz_pojazdu,
+        "formset_galerii": formset_galerii
     })
 
 def pojazdy(request):
@@ -116,6 +117,7 @@ def usun(request, pk):
 @login_required
 def edytuj(request, pk):
     pojazd = get_object_or_404(Pojazd, pk=pk, uzytkownik=request.user)
+    lista_zdjec = pojazd.zdjecie_set.all()
     if request.method == "POST":
         formularz_pojazdu = PojazdForm(request.POST, request.FILES, instance=pojazd)
         if formularz_pojazdu.is_valid():
@@ -128,5 +130,6 @@ def edytuj(request, pk):
     else:
         formularz_pojazdu = PojazdForm(instance=pojazd)
     return render(request, "MotoSell/edytuj.html", {
-        "formularz_pojazdu": formularz_pojazdu
+        "formularz_pojazdu": formularz_pojazdu,
+        "lista_zdjec": lista_zdjec
     })
