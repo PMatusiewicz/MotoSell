@@ -1,28 +1,19 @@
-<!DOCTYPE html>
-<html lang="pl">
-{% load static %}
-    <head>
-        <meta charset="UTF-8">
-        <title>MotoSell</title>
-    </head>
-    <body>
-        {% if not pojazdy_wszystkie  %}
-            <h1>Nie ma żadnych pojazdów</h1>
-        {% else %}
-            {% for pojazd in pojazdy_wszystkie %}
-                {% if pojazd.czy_opublikowany and not pojazd.czy_usuniety %}
-                    <a href="{% url 'pojazdy' %}/{{ pojazd.id }}">
-                        <h3>{{ pojazd.tytul }}</h3>
-                        <p>Oferta użytkownika: {{ pojazd.uzytkownik.username }}</p>
-                        <p>{{ pojazd.marka }} {{ pojazd.model }}</p>
-                    </a>
-                    <hr>
-                {% endif %}
-            {% endfor %}
-        {% endif %}
-        <br><a href="{% url 'index' %}">Powrót na stronę główną</a>
-        {% if request.user.is_authenticated %}
-            <br><a href="{% url 'moje_pojazdy' %}">Zobacz swoje oferty</a>
-        {% endif %}
-    </body>
-</html>
+{% extends "MotoSell/base.html" %}
+{% block content %}
+    <h1>MotoSell</h1>
+    <h3>Oferty Sprzedaży pojazdów drogowych</h3>
+	{% if not pojazdy_wszystkie  %}
+        <h1>Nie ma żadnych pojazdów</h1>
+    {% else %}
+        {% for pojazd in pojazdy_wszystkie %}
+            {% if pojazd.czy_opublikowany and not pojazd.czy_usuniety %}
+                <a href="{% url 'pojazdy' %}/{{ pojazd.id }}">
+                    <h3>{{ pojazd.tytul }}</h3>
+                    <p>Oferta użytkownika: {{ pojazd.uzytkownik.username }}</p>
+                    <p>{{ pojazd.marka }} {{ pojazd.model }}</p>
+                </a>
+                <hr>
+            {% endif %}
+        {% endfor %}
+    {% endif %}
+{% endblock %}

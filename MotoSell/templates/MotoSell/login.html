@@ -1,18 +1,9 @@
-<!DOCTYPE html>
-<html lang="pl">
-{% load static %}
-    <head>
-        <meta charset="UTF-8">
-        <title>MotoSell</title>
-    </head>
-    <body>
-        <form method="post">
-            {% csrf_token %}
-            <h2>Zaloguj się</h2>
-            {{ formularz_logowania }}
-            <button type="submit">Zaloguj się</button>
-        </form>
-        <br><a href="{% url 'rejestracja' %}">Nie masz konta? Zarejestruj się</a>
-        <br><a href="{% url 'index' %}">Powrót na stronę główną</a>
-    </body>
-</html>
+{% extends "MotoSell/base.html" %}
+{% block content %}
+	<form method="post">
+        {% csrf_token %}
+        <h2>Zaloguj się</h2>
+        {{ formularz_logowania }}
+        <button type="submit">Zaloguj się</button>
+    </form>
+{% endblock %}

@@ -8,10 +8,7 @@ from .models import Pojazd
 import datetime
 
 def index(request):
-    uzytkownik = request.user
-    return render(request, "MotoSell/index.html", {
-        "uzytkownik": uzytkownik
-    })
+    return redirect("pojazdy")
 
 def rejestracja(request):
     if request.method == "POST":
@@ -19,7 +16,7 @@ def rejestracja(request):
         if formularz_rejestracji.is_valid():
             nowy_uzytkownik = formularz_rejestracji.save()
             auth_login(request, nowy_uzytkownik)
-            return redirect("index")
+            return redirect("pojazdy")
     else:
         formularz_rejestracji = UserCreationForm()
 
@@ -33,7 +30,7 @@ def login(request):
         if formularz_logowania.is_valid():
             nowy_uzytkownik = formularz_logowania.get_user()
             auth_login(request, nowy_uzytkownik)
-            return redirect("index")
+            return redirect("pojazdy")
     else:
         formularz_logowania = AuthenticationForm()
 
@@ -45,7 +42,7 @@ def login(request):
 @login_required
 def wyloguj(request):
     logout(request)
-    return redirect("index")
+    return redirect("pojazdy")
 
 @login_required
 def kreator(request):

@@ -1,12 +1,6 @@
-<!DOCTYPE html>
-<html lang="pl">
-{% load static %}
-    <head>
-        <meta charset="UTF-8">
-        <title>MotoSell</title>
-    </head>
-    <body>
-    <h1>Twoje oferty:</h1>
+{% extends "MotoSell/base.html" %}
+{% block content %}
+	<h1>Twoje oferty:</h1>
     {% if not pojazdy_wszystkie  %}
         <h1>Nie ma żadnych pojazdów</h1>
     {% else %}
@@ -26,7 +20,4 @@
             {% endif %}
         {% endfor %}
     {% endif %}
-        <br><a href="{% url 'index' %}">Powrót na stronę główną</a>
-        <br><a href="{% url 'pojazdy' %}">Zobacz wszystkie opublikowane oferty</a>
-    </body>
-</html>
+{% endblock %}
