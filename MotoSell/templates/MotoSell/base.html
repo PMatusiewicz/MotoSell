@@ -7,16 +7,15 @@
         <link rel="stylesheet" href="{% static 'style.css' %}">
     </head>
     <body>
-
         <div class="nav">
             {% if request.user.is_authenticated %}
                 <ul>
                     <li><a href="{% url 'pojazdy' %}">MotoSell</a></li>
-                    <li><p>{{ request.user.username }}</p></li>
-                    <li><a href="{% url 'wyloguj' %}"><button>Wyloguj się</button></a></li>
                     <li><a href="{% url 'kreator' %}">Stwórz nową ofertę</a></li>
                     <li><a href="{% url 'pojazdy' %}">Pokaż wszystkie opublikowane oferty</a></li>
                     <li><a href="{% url 'moje_pojazdy' %}">Zobacz swoje oferty</a></li>
+                    <li><span>zalogowany jako: {{ request.user.username }}</span></li>
+                    <li><a href="{% url 'wyloguj' %}">Wyloguj się</a></li>
                 </ul>
             {% else %}
                 <ul>
@@ -29,7 +28,7 @@
         </div>
         <div class="glowne">
             {% block content %}
-            	
+
             {% endblock %}
         </div>
     </body>

@@ -1,0 +1,46 @@
+body {
+    font-family: Helvetica;
+    background-color: rgb(230, 230, 230);
+    padding: 0;
+    margin: 0;
+}
+
+.glowne {
+    width: 50%;
+    background-color: rgb(241, 241, 241);
+    margin: auto;
+    padding: 10px;
+    text-align: center;
+}
+
+.oferta {
+    margin: 40px;
+    padding: 10px;
+    background-color: white;
+    text-align: left;
+    border-radius: 10px;
+}
+
+ul {
+    list-style-type: none;
+    margin: 0;
+    padding: 0;
+    display: flex;
+}
+
+ul li a, span {
+    display: block;
+    color: white;
+    padding: 14px 16px;
+    text-decoration: none;
+    justify-content: center;
+}
+
+ul li:hover {
+    background-color: #002fc6
+}
+
+.nav {
+    background-color: #0e44ff;
+    padding: 0;
+}
