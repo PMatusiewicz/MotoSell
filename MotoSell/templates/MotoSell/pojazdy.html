@@ -9,9 +9,18 @@
             {% if pojazd.czy_opublikowany and not pojazd.czy_usuniety %}
                 <div class="oferta">
                     <a href="{% url 'pojazdy' %}/{{ pojazd.id }}">
-                        <h3>{{ pojazd.tytul }}</h3>
-                        <p>Oferta użytkownika: {{ pojazd.uzytkownik.username }}</p>
-                        <p>{{ pojazd.marka }} {{ pojazd.model }}</p>
+                        <div class="oferta_napisy">
+                            <h3>{{ pojazd.tytul }}</h3>
+                            <p>Oferta użytkownika: {{ pojazd.uzytkownik.username }}</p>
+                            <p>Marka i model: {{ pojazd.marka }} {{ pojazd.model }}</p>
+                        </div>
+                        {% for zdjecie in pojazd.zdjecie_set.all %}
+                            {% if zdjecie.czy_glowny %}
+                                <div class="zdjecie_okladka">
+                                    <img src="{{ zdjecie.zdjecie.url }}" alt="Zdjęcie pojazdu">
+                                </div>
+                            {% endif %}
+                        {% endfor %}
                     </a>
                 </div>
             {% endif %}

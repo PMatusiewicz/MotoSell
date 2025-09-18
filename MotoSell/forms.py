@@ -12,6 +12,6 @@ class PojazdForm(ModelForm):
 class ZdjecieForm(ModelForm):
     class Meta:
         model = Zdjecie
-        fields = ['zdjecie', 'czy_glowny']
+        fields = ['zdjecie']
 
 ZdjecieFormSet = inlineformset_factory(Pojazd, Zdjecie, ZdjecieForm, can_delete=False)

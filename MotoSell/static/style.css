@@ -14,11 +14,26 @@ body {
 }
 
 .oferta {
+    border: 2px black solid;
     margin: 40px;
     padding: 10px;
     background-color: white;
     text-align: left;
     border-radius: 10px;
+}
+.oferta a {
+    display: flex;
+    align-items: flex-start;
+    justify-content: space-between;
+}
+
+.zdjecie_okladka img {
+    height: 160px;
+}
+
+.oferta a {
+    text-decoration: none;
+    color: black;
 }
 
 ul {
@@ -43,4 +58,8 @@ ul li:hover {
 .nav {
     background-color: #0e44ff;
     padding: 0;
+}
+
+input {
+    margin: 5px;
 }
