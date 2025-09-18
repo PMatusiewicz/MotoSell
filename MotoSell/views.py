@@ -4,7 +4,7 @@ from django.contrib.auth.forms import UserCreationForm, AuthenticationForm
 from django.shortcuts import render, redirect, get_object_or_404
 from django.db.models import Q
 from .forms import PojazdForm, ZdjecieFormSet
-from .models import Pojazd
+from .models import Pojazd, Zdjecie
 import datetime
 
 def index(request):
@@ -57,6 +57,14 @@ def kreator(request):
             pojazd.save()
             formset_galerii.instance = pojazd
             formset_galerii.save()
+            for zdjecie in Zdjecie.objects.filter(pojazd=pojazd):
+                if zdjecie.czy_glowny:
+                    break
+            else:
+                pierwsze_zdjecie = Zdjecie.objects.filter(pojazd=pojazd).first()
+                pierwsze_zdjecie.czy_glowny = True
+                pierwsze_zdjecie.save()
+
             return redirect("/pojazdy")
     else:
         formularz_pojazdu = PojazdForm()
