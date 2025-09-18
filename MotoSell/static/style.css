@@ -36,14 +36,14 @@ body {
     color: black;
 }
 
-ul {
+.nav ul {
     list-style-type: none;
     margin: 0;
     padding: 0;
     display: flex;
 }
 
-ul li a, span {
+.nav ul li a, span {
     display: block;
     color: white;
     padding: 14px 16px;
@@ -51,7 +51,7 @@ ul li a, span {
     justify-content: center;
 }
 
-ul li:hover {
+.nav ul li:hover {
     background-color: #002fc6
 }
 
