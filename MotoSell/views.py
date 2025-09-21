@@ -48,7 +48,7 @@ def wyloguj(request):
 def kreator(request):
     if request.method == "POST":
         formularz_pojazdu = PojazdForm(request.POST, request.FILES)
-        formset_galerii = ZdjecieFormSet(request.POST, request.FILES, instance=Pojazd())
+        formset_galerii = ZdjecieFormSet(request.POST, request.FILES)
         if formularz_pojazdu.is_valid() and formset_galerii.is_valid():
             pojazd = formularz_pojazdu.save(commit=False)
             pojazd.uzytkownik = request.user
@@ -57,14 +57,10 @@ def kreator(request):
             pojazd.save()
             formset_galerii.instance = pojazd
             formset_galerii.save()
-            for zdjecie in Zdjecie.objects.filter(pojazd=pojazd):
-                if zdjecie.czy_glowny:
-                    break
-            else:
-                pierwsze_zdjecie = Zdjecie.objects.filter(pojazd=pojazd).first()
+            pierwsze_zdjecie = Zdjecie.objects.filter(pojazd=pojazd).first()
+            if pierwsze_zdjecie:
                 pierwsze_zdjecie.czy_glowny = True
                 pierwsze_zdjecie.save()
-
             return redirect("/pojazdy")
     else:
         formularz_pojazdu = PojazdForm()
@@ -122,19 +118,26 @@ def usun(request, pk):
 @login_required
 def edytuj(request, pk):
     pojazd = get_object_or_404(Pojazd, pk=pk, uzytkownik=request.user)
-    lista_zdjec = pojazd.zdjecie_set.all()
     if request.method == "POST":
         formularz_pojazdu = PojazdForm(request.POST, request.FILES, instance=pojazd)
-        if formularz_pojazdu.is_valid():
+        formset_galerii = ZdjecieFormSet(request.POST, request.FILES, instance=pojazd)
+        if formularz_pojazdu.is_valid() and formset_galerii.is_valid():
             zmodyfikowany_pojazd = formularz_pojazdu.save(commit=False)
             zmodyfikowany_pojazd.uzytkownik = request.user
             if zmodyfikowany_pojazd.czy_opublikowany and not zmodyfikowany_pojazd.data_publikacji:
                 zmodyfikowany_pojazd.data_publikacji = datetime.date.today()
             zmodyfikowany_pojazd.save()
+            formset_galerii.save()
+            pierwsze_zdjecie = Zdjecie.objects.filter(pojazd=pojazd).first()
+            if pierwsze_zdjecie:
+                Zdjecie.objects.filter(pojazd=pojazd, czy_glowny=True).update(czy_glowny=False)
+                pierwsze_zdjecie.czy_glowny = True
+                pierwsze_zdjecie.save()
             return redirect("oferta", pk=pk)
     else:
         formularz_pojazdu = PojazdForm(instance=pojazd)
+        formset_galerii = ZdjecieFormSet(instance=pojazd)
     return render(request, "MotoSell/edytuj.html", {
         "formularz_pojazdu": formularz_pojazdu,
-        "lista_zdjec": lista_zdjec
+        "formset_galerii": formset_galerii
     })

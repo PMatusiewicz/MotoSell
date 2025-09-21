@@ -14,4 +14,4 @@ class ZdjecieForm(ModelForm):
         model = Zdjecie
         fields = ['zdjecie']
 
-ZdjecieFormSet = inlineformset_factory(Pojazd, Zdjecie, ZdjecieForm, can_delete=False)
+ZdjecieFormSet = inlineformset_factory(Pojazd, Zdjecie, ZdjecieForm, can_delete=False, extra=5, max_num=5, min_num=1)

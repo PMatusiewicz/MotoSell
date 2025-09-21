@@ -4,6 +4,8 @@
         {% csrf_token %}
         <h2>Edytuj ofertę</h2>
         {{ formularz_pojazdu }}
+        <p>Musisz dodać conajmniej 1 zdjęcie</p>
+        {{ formset_galerii }}
         <button type="submit">Zapisz zmiany</button>
     </form>
 {% endblock %}
