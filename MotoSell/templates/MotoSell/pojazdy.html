@@ -13,6 +13,7 @@
                             <h3>{{ pojazd.tytul }}</h3>
                             <p>Oferta użytkownika: {{ pojazd.uzytkownik.username }}</p>
                             <p>Marka i model: {{ pojazd.marka }} {{ pojazd.model }}</p>
+                            <p>Kategoria: {{ pojazd.kategoria }}</p>
                         </div>
                         {% for zdjecie in pojazd.zdjecie_set.all %}
                             {% if zdjecie.czy_glowny %}
