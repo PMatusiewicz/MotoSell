@@ -5,6 +5,7 @@ from rest_framework_simplejwt.views import (TokenObtainPairView, TokenRefreshVie
 
 router = DefaultRouter()
 router.register(r'pojazdy', views_api.PojazdViewSet, basename='pojazd')
+router.register(r'zdjecie', views_api.ZdjecieViewSet, basename='zdjecie')
 
 urlpatterns = [
     path('', include(router.urls)),

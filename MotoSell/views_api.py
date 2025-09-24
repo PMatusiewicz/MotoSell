@@ -1,8 +1,8 @@
 from rest_framework import viewsets, permissions, generics
 from rest_framework.decorators import action
 from rest_framework.response import Response
-from .models import Pojazd
-from .serializers import PojazdSerializer, RejestracjaSerializer
+from .models import Pojazd, Zdjecie
+from .serializers import PojazdSerializer, RejestracjaSerializer, ZdjecieSerializer
 import datetime
 from django.db.models import Q
 from django.contrib.auth.models import User
@@ -63,3 +63,8 @@ class RegisterView(generics.CreateAPIView):
     queryset = User.objects.all()
     serializer_class = RejestracjaSerializer
     permission_classes = [permissions.AllowAny]
+
+class ZdjecieViewSet(viewsets.ModelViewSet):
+    queryset = Zdjecie.objects.all()
+    serializer_class = ZdjecieSerializer
+    permission_classes = [permissions.IsAuthenticated]
