@@ -1,10 +1,11 @@
-from rest_framework import viewsets, permissions
+from rest_framework import viewsets, permissions, generics
 from rest_framework.decorators import action
 from rest_framework.response import Response
 from .models import Pojazd
-from .serializers import PojazdSerializer
+from .serializers import PojazdSerializer, RejestracjaSerializer
 import datetime
 from django.db.models import Q
+from django.contrib.auth.models import User
 
 class PojazdViewSet(viewsets.ModelViewSet):
     serializer_class = PojazdSerializer
@@ -58,3 +59,7 @@ class PojazdViewSet(viewsets.ModelViewSet):
         pojazd.czy_usuniety = True
         pojazd.save()
         return Response({"status": "usunieto oferte"})
+class RegisterView(generics.CreateAPIView):
+    queryset = User.objects.all()
+    serializer_class = RejestracjaSerializer
+    permission_classes = [permissions.AllowAny]
