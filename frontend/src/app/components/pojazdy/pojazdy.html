@@ -1,0 +1,8 @@
+<h1>Lista pojazdów</h1>
+<p>Liczba pojazdów: {{ pojazdy.length }}</p>
+<ul>
+    <li *ngFor="let pojazd of pojazdy">
+    <p>{{ pojazd.tytul }}</p>
+    <p>{{ pojazd.opis }}</p>
+    </li>
+</ul>
