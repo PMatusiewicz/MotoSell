@@ -1,27 +1,16 @@
-import { Component, OnInit, inject } from '@angular/core';
+import { Component, inject } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { PojazdyService } from '../../services/pojazdy';
+import { RouterModule } from '@angular/router';
 
 @Component({
-  selector: 'app-pojazdy',
-  standalone: true,
-  imports: [CommonModule],
-  templateUrl: './pojazdy.html',
-  styleUrl: './pojazdy.css'
+    selector: 'app-pojazdy',
+    standalone: true,
+    imports: [CommonModule, RouterModule],
+    templateUrl: './pojazdy.html',
+    styleUrl: './pojazdy.css'
 })
-export class Pojazdy implements OnInit {
-  pojazdy: any[] = [];
-  private pojazdService = inject(PojazdyService);
-
-  ngOnInit(): void {
-  this.pojazdService.getPojazdy().subscribe({
-    next: data => {
-      console.log('Dane z API:', data); // sprawdź w konsoli po odświeżeniu
-      this.pojazdy = data;
-    },
-    error: err => {
-      console.error('Błąd pobierania:', err);
-    }
-  });
-}
+export class PojazdyComponent {
+    private pojazdService = inject(PojazdyService);
+    pojazdy$ = this.pojazdService.getPojazdy();
 }

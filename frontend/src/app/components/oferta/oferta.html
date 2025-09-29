@@ -1,0 +1,21 @@
+<div *ngIf="pojazd$ | async as pojazd">
+    <h1>{{ pojazd.tytul }}</h1>
+    <p>Opis: {{ pojazd.opis }}</p>
+    <p>Oferta użytkownika: {{ pojazd.uzytkownik.username }}</p>
+    <p>Kategoria: {{ pojazd.kategoria }}</p>
+    <p>Marka: {{ pojazd.marka }}</p>
+    <p>Model: {{ pojazd.model }}</p>
+    <p>Rok produkcji: {{ pojazd.rok_produkcji }}</p>
+    <p>Przebieg: {{ pojazd.przebieg }}</p>
+    <p>Pojemność skokowa: {{ pojazd.pojemnosc_skokowa }}</p>
+    <p>Rodzaj paliwa: {{ pojazd.rodzaj_paliwa }}</p>
+    <p>Zdjęcia pojazdu:</p>
+    <img *ngFor="let zdjecie of pojazd.zdjecia" src="{{ zdjecie.zdjecie }}" alt="zdjęcie pojazdu" height="200px">
+</div>
+
+
+<!-- <p>Oferta opublikowana w dniu {{ pojazd.data_publikacji }}</p> -->
+
+
+
+<!-- <p>Oferta nieopublikowana</p> -->

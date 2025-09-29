@@ -1,1 +1,18 @@
-<app-pojazdy></app-pojazdy>
+<div class="nav">
+    <ul *ngIf="!(auth.isLoggedIn$ | async)">
+        <li><a [routerLink]="['/pojazdy']">MotoSell</a></li>
+        <li><a [routerLink]="['/pojazdy']">Pokaż oferty</a></li>
+        <li><a href="">Zarejestruj się</a></li>
+        <li><a [routerLink]="['/login']">Zaloguj się</a></li>
+    </ul>
+    <ul *ngIf="(auth.isLoggedIn$ | async)">
+        <li><a [routerLink]="['/pojazdy']">MotoSell</a></li>
+        <li><a [routerLink]="['/pojazdy']">Pokaż wszystkie opublikowane oferty</a></li>
+        <li><a [routerLink]="['/pojazdy/moje']">Zobacz swoje oferty</a></li>
+        <li><span>Zalogowany</span></li>
+        <li><a (click)="logout()">Wyloguj się</a></li>
+    </ul>
+</div>
+<div class="glowne">
+    <router-outlet></router-outlet>
+</div>

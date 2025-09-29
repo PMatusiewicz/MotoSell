@@ -1,1 +1,65 @@
-/* You can add global styles to this file, and also import other style files */
+body {
+    font-family: Helvetica;
+    background-color: rgb(230, 230, 230);
+    padding: 0;
+    margin: 0;
+}
+
+.glowne {
+    width: 50%;
+    background-color: rgb(241, 241, 241);
+    margin: auto;
+    padding: 10px;
+    text-align: center;
+}
+
+.oferta {
+    border: 2px black solid;
+    margin: 40px;
+    padding: 10px;
+    background-color: white;
+    text-align: left;
+    border-radius: 10px;
+}
+.oferta a {
+    display: flex;
+    align-items: flex-start;
+    justify-content: space-between;
+}
+
+.zdjecie_okladka img {
+    height: 160px;
+}
+
+.oferta a {
+    text-decoration: none;
+    color: black;
+}
+
+.nav ul {
+    list-style-type: none;
+    margin: 0;
+    padding: 0;
+    display: flex;
+}
+
+.nav ul li a, span {
+    display: block;
+    color: white;
+    padding: 14px 16px;
+    text-decoration: none;
+    justify-content: center;
+}
+
+.nav ul li:hover {
+    background-color: #002fc6
+}
+
+.nav {
+    background-color: #0e44ff;
+    padding: 0;
+}
+
+input {
+    margin: 5px;
+}

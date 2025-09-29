@@ -1,8 +1,15 @@
-<h1>Lista pojazdów</h1>
-<p>Liczba pojazdów: {{ pojazdy.length }}</p>
-<ul>
-    <li *ngFor="let pojazd of pojazdy">
-    <p>{{ pojazd.tytul }}</p>
-    <p>{{ pojazd.opis }}</p>
-    </li>
-</ul>
+<h1>MotoSell</h1>
+<h3>Oferty Sprzedaży pojazdów drogowych</h3>
+<div class="oferta" *ngFor="let pojazd of (pojazdy$ | async)">
+    <a [routerLink]="['/pojazdy', pojazd.id]">
+        <div class="oferta_napisy">
+            <h3>{{ pojazd.tytul }}</h3>
+            <p>Oferta użytkownika: {{ pojazd.uzytkownik.username }}</p>
+            <p>Marka i model: {{ pojazd.marka }} {{ pojazd.model }}</p>
+            <p>Kategoria: {{ pojazd.kategoria }}</p>
+        </div>
+        <div class="zdjecie_okladka">
+            <img src="{{pojazd.zdjecia[0].zdjecie}}" alt="zdjęcie pojazdu">
+        </div>
+    </a>
+</div>
